@@ -28,10 +28,10 @@
 3.打开[Go-HttpQQ](https://docs.go-cqhttp.org/)客户端(确保已经将WS(Socket)端口设置为8080)
 
 
-4.解压Gohttp.zip
+4.解压GoHttpqq-Socket.zip
 
 
-5.打开Gohttp.exe挂在后台 
+5.打开GoHttpqq-Socket.exe挂在后台 
 
 
 6.在群中发送cx即可获取服务器信息
