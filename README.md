@@ -22,7 +22,8 @@
 1.将SocketServer.dll文件放到PluginApi/{port}/plugin里
 
 
-2.打开服务器
+2.打开服务器(确保7778Tcp端口是打开的)
+
 
 
 3.打开[Go-HttpQQ](https://docs.go-cqhttp.org/)客户端(确保已经将WS(Socket)端口设置为8080)
