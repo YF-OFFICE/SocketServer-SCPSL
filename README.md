@@ -1,4 +1,4 @@
-# SocketServer-SCPSL
+#[YF-OFFICE]SocketServer-SCPSL
 一个可以将QQ群与服务端连接的插件
 
 更新至EXILED8.5.0版本
