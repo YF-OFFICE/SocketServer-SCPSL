@@ -1,3 +1,6 @@
+####本分支源码已报废 请转到Master分支查看
+
+
 #[YF-OFFICE]SocketServer-SCPSL
 一个可以将QQ群与服务端连接的插件
 
