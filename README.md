@@ -1,4 +1,4 @@
-####本分支源码已报废 请转到Master分支查看
+####本分支源码已报废 请转到Main分支查看
 
 
 #[YF-OFFICE]SocketServer-SCPSL
