@@ -1,7 +1,16 @@
 # SocketServer-SCPSL
 一个可以将QQ群与服务端连接的插件
 
-目前所有拥有的指令:cx,info
+目前所有拥有的指令:cx,info，round
+
+增加round指令
+round list查询玩家列表
+round rest 重启回合
+round start 启动回合
+round allrest 重启服务器
+round kick+id 踢出对应id玩家
+round bc+text 向服务器发送广播
+Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues里提出
 
 
 说明：
