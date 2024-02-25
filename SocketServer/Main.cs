@@ -93,6 +93,78 @@ namespace SocketServer
                         Log.Debug($"接收消息{returna} - {a}");
 
                     }
+                         else if (returna == "start")
+     {
+         string aaa = string.Empty;
+         if (Round.IsStarted)
+         {
+             aaa = "回合已经开启了";
+         }
+         else
+         {
+             Round.Start();
+             aaa = "回合启动成功";
+         }
+         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+         socket.Send(bytes);
+         socket.Close();
+     }
+     else if (returna == "rest")
+     {
+         string aaa = string.Empty;
+         Round.Restart();
+         aaa = "回合启动成功";
+         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+         socket.Send(bytes);
+         socket.Close();
+     }
+     else if (returna == "allrest")
+     {
+         string aaa = string.Empty;
+         Server.Restart();
+         aaa = "服务器启动成功";
+         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+         socket.Send(bytes);
+         socket.Close();
+     }
+     else if (returna.Contains("bc"))
+     {
+         string[] array2 = returna.Split('&');
+         string aaa = string.Empty;
+         Exiled.API.Features.Map.Broadcast(10, "[管理员消息]" + array2[1]);
+         aaa = "bc发送成功";
+         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+         socket.Send(bytes);
+         socket.Close();
+     }
+     else if (returna == ("list"))
+     {
+         string aaa = string.Empty;
+         foreach (var item in Player.List)
+         {
+             aaa += $"\r\n{item.Nickname}-{item.Id}";
+         }
+         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+         socket.Send(bytes);
+         socket.Close();
+     }
+     else if (returna.Contains("kick"))
+     {
+         string[] array2 = returna.Split('&');
+         string aaa = string.Empty;
+         Player a2a = Player.List.ToList().Find(x => x.Id.ToString() == array2[1]);
+         if (a2a == null)
+         { aaa = "踢出失败"; }
+         else
+         {
+             a2a.Kick("你已经被服务器踢出 原因请加q群询问");
+             aaa = "踢出玩家成功";
+         }
+
+         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+         socket.Send(bytes);
+         socket.Close();
+     }
                 }
 
             });
