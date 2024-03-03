@@ -37,7 +37,26 @@ Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues�
 
 
 
-3.打开[Go-HttpQQ](https://docs.go-cqhttp.org/)客户端(确保已经将WS正向(Socket)端口设置为8080)
+~~3.打开[Go-HttpQQ](https://docs.go-cqhttp.org/)客户端(确保已经将WS正向(Socket)端口设置为8080)~~
+
+
+因为现Gocqhttp不能用 提供两种解决方法
+
+
+
+1.使用OpenSharmy框架(缺点占用服务器后台内存可能会很大) 提供教程链接 :[BiliBIli](https://www.bilibili.com/video/BV17m41197tQ)
+
+
+~~~~
+ 2.使用qq官方框架(例如:gensokyo框架)(缺点:需要自己注册一个qq机器人)
+
+
+其他的还是一样
+
+道理和方法都是一样的 都是正向websocket8080端口 如有不懂的 可以添加qq询问
+
+~~~~
+
 
 
 4.解压GoHttpqq-Socket.zip
