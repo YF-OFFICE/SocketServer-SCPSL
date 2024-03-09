@@ -46,14 +46,19 @@ Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues�
 
 1.使用OpenSharmy框架(缺点占用服务器后台内存可能会很大) 提供教程链接 :[BiliBIli](https://www.bilibili.com/video/BV17m41197tQ)
 
+Warn:不用安装OverFlow 到转换端口那一步 将端口5800专向8080端口 然后模拟器保持在后台运行 然后
+
+4.解压GoHttpqq-Socket.zip
+
+
+5.打开GoHttpqq-Socket.exe挂在后台 
+
+就可以了 可以说是暂时代替 
+
 
 ~~~~
  2.使用qq官方框架(例如:gensokyo框架)(缺点:需要自己注册一个qq机器人)
 
-
-其他的还是一样
-
-道理和方法都是一样的 都是正向websocket8080端口 如有不懂的 可以添加qq询问
 
 ~~~~
 
