@@ -1,6 +1,23 @@
 # SocketServer-SCPSL
 一个可以将QQ群与服务端连接的插件
 
+~~~~
+Warn:本权限组只允许群主使用Round指令  插件和程序正常运行 只是需要一个qq客户端的正向Websocket8080端口来链接 替换Cq客户端的方法在下方 当然你也可以自行寻找 只要是能有正向WebSocket8080端口就ok
+~~~~
+
+
+如需更改权限组或者指定用户可以
+```cs
+context.Sender.Role == CqRole.Admin
+```
+CqRole提供了三个用户组Onwer,admin,member
+
+也可以指定用户
+```cs
+context.Sender.UserId == 1111
+```
+
+
 目前所有拥有的指令:cx,info，round
 
 增加round指令
