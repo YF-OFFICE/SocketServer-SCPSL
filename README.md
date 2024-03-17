@@ -1,4 +1,7 @@
 # SocketServer-SCPSL
+<a href="https://github.com/YF-OFFICE/SocketServer-SCPSL/releases"><img src="https://img.shields.io/github/v/release/YF-OFFICE/SocketServer-SCPSL?display_name=tag&style=for-the-badge&logo=gitbook&label=Release" href="https://github.com/YF-OFFICE/SocketServer-SCPSL/releases" alt="GitHub Releases"></a>
+<img src="https://img.shields.io/github/downloads/YF-OFFICE/SocketServer-SCPSL/total?style=for-the-badge&logo=github" alt="Downloads">
+
 一个可以将QQ群与服务端连接的插件
 
 ~~~~
