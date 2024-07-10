@@ -4,33 +4,22 @@
 
 一个可以将QQ群与服务端连接的插件
 
-~~~~
-Warn:本权限组只允许群主使用Round指令  插件和程序正常运行 只是需要一个qq客户端的正向Websocket8080端口来链接 替换Cq客户端的方法在下方 当然你也可以自行寻找 只要是能有正向WebSocket8080端口就ok
-~~~~
+# 如有bug请在Iss里提出
 
 
-如需更改权限组或者指定用户可以
-```cs
-context.Sender.Role == CqRole.Admin
-```
-CqRole提供了三个用户组Onwer,admin,member
-
-也可以指定用户
-```cs
-context.Sender.UserId == 1111
-```
+~~Warn:本权限组只允许群主使用Round指令  插件和程序正常运行 只是需要一个qq客户端的正向Websocket8080端口来链接 替换Cq客户端的方法在下方 当然你也可以自行寻找 只要是能有正向WebSocket8080端口就ok~~
 
 
-目前所有拥有的指令:cx,info，round
+目前所有拥有的指令:cx,info，round(暂不支持)
 
-增加round指令
+~~增加round指令
 round list查询玩家列表
 round rest 重启回合
 round start 启动回合
 round allrest 重启服务器
 round kick+id 踢出对应id玩家
 round bc+text 向服务器发送广播
-Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues里提出
+Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues里提出~~
 
 
 说明：
@@ -53,50 +42,58 @@ Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues�
 1.将SocketServer.dll文件放到exiled/plugin里
 
 
-2.打开服务器(确保10078Tcp端口是打开的)
+2.打开服务器(确保对应的端口是打开的) 【如有多个服务器请在 对应exconfig里修改端口和name】
 
+```cs
+        public int TcpPort { get; set; } = 10087;
+        public string IP { get; set; } = "127.0.0.1";
+        public string name { get; set; } = "1服";
+        public bool IsEnabled { get ; set ; }=true;
+        public bool Debug { get ; set ; } = false;
+```
 
-
-~~3.打开[Go-HttpQQ](https://docs.go-cqhttp.org/)客户端(确保已经将WS正向(Socket)端口设置为8080)~~
-
-
+~~~~
 因为现Gocqhttp不能用 提供两种解决方法
+~~~~
+
+=====================================================
 
 
-
-1.使用OpenSharmy框架(缺点占用服务器后台内存可能会很大) ~~提供教程链接 :[BiliBIli](https://www.bilibili.com/video/BV17m41197tQ)~~
+①.使用OpenSharmy框架(缺点占用服务器后台内存可能会很大) ~~提供教程链接 :[BiliBIli](https://www.bilibili.com/video/BV17m41197tQ)~~
 
 教程视频已经不在 请到[点我](https://github.com/YF-OFFICE/SocketServer-SCPSL/blob/main/Yee.md)查看教程
 
-Warn:不用安装OverFlow 到转换端口那一步 将端口5800专向8080端口 然后模拟器保持在后台运行 然后
+Warn:不用安装OverFlow 到转换端口那一步 将端口5800专向8080端口 然后模拟器保持在后台运行
+
+
+②.使用qq官方框架(例如:gensokyo框架)(缺点:需要自己注册一个qq机器人)
+
+
+③.最推荐 使用[NapNeko](https://github.com/NapNeko/NapCatQQ)机器人登录 并且在初次运行后 将config里的ws改为6700
+
+
+
+```cs
+如:"ws": {
+    "enable": true,
+    "host": "127.0.0.1",
+    "port": 6700
+```
+=========================================================
 
 4.解压GoHttpqq-Socket.zip
 
 
-5.打开GoHttpqq-Socket.exe挂在后台 
+5.打开GoHttpqq-Socket.exe
 
-就可以了 可以说是暂时代替 除了round list暂时不能用 其他功能均正常运行
+6.先输入你想要查询的服务器 如有多个请用*隔开 如只有一个就只写一个 
 
+7.写入能查询的群号 规则同上↑
 
-~~~~
- 2.使用qq官方框架(例如:gensokyo框架)(缺点:需要自己注册一个qq机器人)
+回车确定 挂在后台
 
+就可以了 可以说是暂时代替 除了round暂时不能用 其他功能均正常运行
 
-~~~~
-
-
-
-4.解压GoHttpqq-Socket.zip
+6.在群中发送cx，info即可获取服务器信息
 
 
-5.打开GoHttpqq-Socket.exe挂在后台 
-
-
-6.在群中发送cx即可获取服务器信息
-
-注意:本插件没有指定QQ群 也就是说所登陆的QQ账号的所有群都适用
-
-
-
-
-如有bug请在Iss里提出
