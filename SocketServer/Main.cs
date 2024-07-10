@@ -26,14 +26,15 @@ namespace SocketServer
     { 
         public int TcpPort { get; set; } = 10087;
         public string IP { get; set; } = "127.0.0.1";
+        public string name { get; set; } = "1服";
         public bool IsEnabled { get ; set ; }=true;
         public bool Debug { get ; set ; } = false;
     }
     public class Main:Plugin<Config>
     {
-        public override string Author => "yudr";
+        public override string Author => "yudir";
         public override string Name => "CX";
-        public override Version Version =>new Version(1,1,1);
+        public override Version Version =>new Version(1,2,0);
         public static Main Maina;
 
         public override void OnEnabled()
@@ -65,7 +66,7 @@ namespace SocketServer
                     if (returna == "cx")
                     {
                         string a = string.Empty;
-                        a += $"服务器#1 - 查询Success!!";
+                        a += $"{Config.name} - 查询Success!!";
                         a += $"\r\n在线人数:{Player.List.Count().ToString()}/{Server.MaxPlayerCount}";
                         a += $"\r\n在线管理:{Player.List.ToList().FindAll(x => x.RemoteAdminAccess).Count}人";
                         a += $"\r\nIP:{Server.IpAddress}:{Server.Port}";
@@ -79,11 +80,11 @@ namespace SocketServer
                     else if (returna == "info")
                     {
                         string a = string.Empty;
-                        a += $"服务器#1 - 查询Success!!";
+                        a += $"{Config.name} - 查询Success!!";
                         a += $"\r\nDD人数:{Player.Get(PlayerRoles.RoleTypeId.ClassD).Count()}";
                         a += $"\r\n博士人数:{Player.Get(PlayerRoles.RoleTypeId.Scientist).Count()}人";
                         a += $"\r\nSCP人数:{Player.Get(PlayerRoles.Team.SCPs).Count()}";
-                        a += $"\r\n回合进行时间：{Round.ElapsedTime.TotalMinutes}/{Round.ElapsedTime.TotalSeconds}";
+                        a += $"\r\n回合进行时间：{Round.ElapsedTime.Minutes}/{Round.ElapsedTime.Seconds}";
                         a += $"\r\n回合次数：{Round.UptimeRounds}";
                         a += $"\r\n下一波刷新时间：{Respawn.NextTeamTime.Minute}min/{Respawn.NextTeamTime.Second}s";
                         a += "\r\n查询时间" + DateTime.Now; 
@@ -93,78 +94,78 @@ namespace SocketServer
                         Log.Debug($"接收消息{returna} - {a}");
 
                     }
-                         else if (returna == "start")
-     {
-         string aaa = string.Empty;
-         if (Round.IsStarted)
-         {
-             aaa = "回合已经开启了";
-         }
-         else
-         {
-             Round.Start();
-             aaa = "回合启动成功";
-         }
-         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
-         socket.Send(bytes);
-         socket.Close();
-     }
-     else if (returna == "rest")
-     {
-         string aaa = string.Empty;
-         Round.Restart();
-         aaa = "回合启动成功";
-         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
-         socket.Send(bytes);
-         socket.Close();
-     }
-     else if (returna == "allrest")
-     {
-         string aaa = string.Empty;
-         Server.Restart();
-         aaa = "服务器启动成功";
-         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
-         socket.Send(bytes);
-         socket.Close();
-     }
-     else if (returna.Contains("bc"))
-     {
-         string[] array2 = returna.Split('&');
-         string aaa = string.Empty;
-         Exiled.API.Features.Map.Broadcast(10, "[管理员消息]" + array2[1]);
-         aaa = "bc发送成功";
-         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
-         socket.Send(bytes);
-         socket.Close();
-     }
-     else if (returna == ("list"))
-     {
-         string aaa = string.Empty;
-         foreach (var item in Player.List)
-         {
-             aaa += $"\r\n{item.Nickname}-{item.Id}";
-         }
-         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
-         socket.Send(bytes);
-         socket.Close();
-     }
-     else if (returna.Contains("kick"))
-     {
-         string[] array2 = returna.Split('&');
-         string aaa = string.Empty;
-         Player a2a = Player.List.ToList().Find(x => x.Id.ToString() == array2[1]);
-         if (a2a == null)
-         { aaa = "踢出失败"; }
-         else
-         {
-             a2a.Kick("你已经被服务器踢出 原因请加q群询问");
-             aaa = "踢出玩家成功";
-         }
+     //                    else if (returna == "start")
+     //{
+     //    string aaa = string.Empty;
+     //    if (Round.IsStarted)
+     //    {
+     //        aaa = "回合已经开启了";
+     //    }
+     //    else
+     //    {
+     //        Round.Start();
+     //        aaa = "回合启动成功";
+     //    }
+     //    byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+     //    socket.Send(bytes);
+     //    socket.Close();
+     //}
+     //else if (returna == "rest")
+     //{
+     //    string aaa = string.Empty;
+     //    Round.Restart();
+     //    aaa = "回合启动成功";
+     //    byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+     //    socket.Send(bytes);
+     //    socket.Close();
+     //}
+     //else if (returna == "allrest")
+     //{
+     //    string aaa = string.Empty;
+     //    Server.Restart();
+     //    aaa = "服务器启动成功";
+     //    byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+     //    socket.Send(bytes);
+     //    socket.Close();
+     //}
+     //else if (returna.Contains("bc"))
+     //{
+     //    string[] array2 = returna.Split('&');
+     //    string aaa = string.Empty;
+     //    Exiled.API.Features.Map.Broadcast(10, "[管理员消息]" + array2[1]);
+     //    aaa = "bc发送成功";
+     //    byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+     //    socket.Send(bytes);
+     //    socket.Close();
+     //}
+     //else if (returna == ("list"))
+     //{
+     //    string aaa = string.Empty;
+     //    foreach (var item in Player.List)
+     //    {
+     //        aaa += $"\r\n{item.Nickname}-{item.Id}";
+     //    }
+     //    byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+     //    socket.Send(bytes);
+     //    socket.Close();
+     //}
+     //else if (returna.Contains("kick"))
+     //{
+     //    string[] array2 = returna.Split('&');
+     //    string aaa = string.Empty;
+     //    Player a2a = Player.List.ToList().Find(x => x.Id.ToString() == array2[1]);
+     //    if (a2a == null)
+     //    { aaa = "踢出失败"; }
+     //    else
+     //    {
+     //        a2a.Kick("你已经被服务器踢出 原因请加q群询问");
+     //        aaa = "踢出玩家成功";
+     //    }
 
-         byte[] bytes = Encoding.UTF8.GetBytes(aaa);
-         socket.Send(bytes);
-         socket.Close();
-     }
+     //    byte[] bytes = Encoding.UTF8.GetBytes(aaa);
+     //    socket.Send(bytes);
+     //    socket.Close();
+     //}
                 }
 
             });
