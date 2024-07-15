@@ -25,10 +25,7 @@ using System.Text;
 
 }
 
-CqWsSession session = new CqWsSession(new CqWsSessionOptions
-{
-    BaseUri = new Uri("ws://localhost:6700"),  // WebSocket 地址
-});
+
 Console.WriteLine("\r\nWelcome DIRSYSTEM-V1.2.0 Byyudir");
 Console.WriteLine("\r\n[DIRSystem]: 使用前请确保打开了正向WebSocket6700端口 服务器端打开TCP端口");
 Console.WriteLine();
@@ -49,129 +46,141 @@ if (qq.Contains("*"))
 }
 Console.WriteLine("\r\n[DIRSystem]: 使用Q群指令:cx,info,round(功能仅限本群管理员与管理员能用)");
 Console.WriteLine("\r\n[DIRSystem]: 正在连接WebSK-Success-Sk6700端口");
+CqWsSession session = new CqWsSession(new CqWsSessionOptions
+{
+    BaseUri = new Uri("ws://localhost:6700"),  // WebSocket 地址
+});
+Console.WriteLine("\r\n[DIRSystem]: Binggo 连接成功 请将我挂在后台哦");
 session.UseGroupMessage(async context =>
 {
     if (strings.Contains(context.GroupId.ToString()))
     {
-        if (context.Message.Text == "cx")
+        if (context.Message.Text.Contains("cx"))
         {
-            string total = "";
-            if (port1.Count() >= 1)
+            string total = string.Empty;
+
+            foreach (var item in port1)
             {
-                for (int i = 0; i < ports.Count(); i++)
+                string wda = SocketServer("127.0.0.1", int.Parse(item), "cx");
+                if (wda == "null")
                 {
-                    string wda = SocketServer("127.0.0.1", int.Parse(port1[i]), "cx");
-                    if (wda == "null")
-                    {
-                        total += $"#{i}服不在线 awa";
-                    }
-                    else
-                    {
-                        total += wda;
-                    }
+                    total += $"#{port1}服不在线 awa";
                 }
+                else
+                {
+                    total += wda;
+                }
+
             }
-          
+
+
+
 
             await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(total));
             //Console.WriteLine($"收到来自{context.GroupId}的{context.UserId}的查询消息返回{a}");
         }
-        else if (context.Message.Text == "info")
+        else if (context.Message.Text.Contains("info"))
         {
             string total = "";
-            if (port1.Count() >= 1)
+            foreach (var item1 in port1)
             {
-                for (int i = 0; i < ports.Count(); i++)
+                string wda = SocketServer("127.0.0.1", int.Parse(item1), "info");
+                if (wda == "null")
                 {
-                    string wda = SocketServer("127.0.0.1", int.Parse(port1[i]), "info");
-                    if (wda == "null")
-                    {
-                        total += $"#{i}服不在线 awa";
-                    }
-                    else
-                    {
-                        total += wda;
-                    }
+                    total += $"#{item1}服不在线 awa";
+                }
+                else
+                {
+                    total += wda;
                 }
             }
+
+
+
 
             await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(total));
 
         }
-        //else if (context.Message.Text.Contains("round"))
-        //{
-        //    if (context.Sender.Role == CqRole.Admin)
-        //    {
-        //        string[] sad = context.Message.Text.Split(Array.Empty<char>());
-        //        if (sad[1] == "start")
-        //        {
-        //            string a = SocketServer("127.0.0.1", 10087, "start");
-        //            if (a == "null")
-        //            {
-        //                a = "服务器不在线 awa";
+        else if (context.Message.Text.Contains("round"))
+        {
+            if (context.Sender.Role == CqRole.Admin || context.Sender.Role == CqRole.Owner)
+            {
+                string[] all = context.Message.Text.Split(Array.Empty<char>());
+                if (all[0] == "round" && port1.Contains(all[1]))
+                {
 
-        //            }
-        //            await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
-        //        }
-        //        else if (sad[1] == "rest")
-        //        {
-        //            string a = SocketServer("127.0.0.1", 10087, "rest");
-        //            if (a == "null")
-        //            {
-        //                a = "服务器不在线 awa";
+                    if (all[2] == "start")
+                    {
+                        string a = SocketServer("127.0.0.1", int.Parse(all[1]), "start");
+                        if (a == "null")
+                        {
+                            a = $"{all[1]}服务器不在线 awa";
 
-        //            }
-        //            await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
-        //        }
-        //        else if (sad[1] == "allrest")
-        //        {
-        //            string a = SocketServer("127.0.0.1", 10087, "allrest");
-        //            if (a == "null")
-        //            {
-        //                a = "服务器不在线 awa";
+                        }
+                        await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
+                    }
+                    else if (all[2] == "rest")
+                    {
+                        string a = SocketServer("127.0.0.1", int.Parse(all[1]), "rest");
+                        if (a == "null")
+                        {
+                            a = $"{all[1]}服务器不在线 awa";
 
-        //            }
-        //            await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
-        //        }
-        //        else if (sad[1] == "bc")
-        //        {
-        //            string a = SocketServer("127.0.0.1", 10087, $"bc&{sad[2]}");
-        //            if (a == "null")
-        //            {
-        //                a = "服务器不在线 awa";
+                        }
+                        await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
+                    }
+                    else if (all[2] == "allrest")
+                    {
+                        string a = SocketServer("127.0.0.1", int.Parse(all[1]), "allrest");
+                        if (a == "null")
+                        {
+                            a = $"{all[1]}服务器不在线 awa";
 
-        //            }
-        //            await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
-        //        }
-        //        else if (sad[1] == "list")
-        //        {
-        //            string a = SocketServer("127.0.0.1", 10087, "list");
-        //            if (a == "null")
-        //            {
-        //                a = "服务器不在线 awa";
+                        }
+                        await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
+                    }
+                    else if (all[2] == "bc")
+                    {
+                        string a = SocketServer("127.0.0.1", int.Parse(all[1]), $"bc&{all[3]}");
+                        if (a == "null")
+                        {
+                            a = "服务器不在线 awa";
 
-        //            }
-        //            await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
-        //        }
-        //        else if (sad[1] == "kick")
-        //        {
-        //            string a = SocketServer("127.0.0.1", 10087, $"kick&{sad[2]}");
-        //            if (a == "null")
-        //            {
-        //                a = "服务器不在线 awa";
+                        }
+                        await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
+                    }
+                    else if (all[2] == "list")
+                    {
+                        string a = SocketServer("127.0.0.1", int.Parse(all[1]), "list");
+                        if (a == "null")
+                        {
+                            a = "服务器不在线 awa";
 
-        //            }
-        //            await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
-        //        }
+                        }
+                        await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
+                    }
+                    else if (all[2] == "kick")
+                    {
+                        string a = SocketServer("127.0.0.1", int.Parse(all[1]), $"kick&{all[3]}");
+                        if (a == "null")
+                        {
+                            a = "服务器不在线 awa";
 
-        //    }
-        //    else
-        //    {
-        //        await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage("你没权限hahah"));
-        //    }
+                        }
+                        await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage(a));
+                    }
+                }
 
 
-        //}
+            }
+            else
+            {
+                await session.SendGroupMessageAsync(context.GroupId, new EleCho.GoCqHttpSdk.Message.CqMessage("你没权限hahah"));
+            }
+
+
+        }
+
     }
 
 });
