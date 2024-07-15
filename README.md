@@ -7,19 +7,19 @@
 # 如有bug请在[Iss](https://github.com/YF-OFFICE/SocketServer-SCPSL/issues)里提出
 
 
-~~Warn:本权限组只允许群主使用Round指令  插件和程序正常运行 只是需要一个qq客户端的正向Websocket8080端口来链接 替换Cq客户端的方法在下方 当然你也可以自行寻找 只要是能有正向WebSocket8080端口就ok~~
+Warn:本权限组允许群主和管理员使用Round指令  插件和程序正常运行 只是需要一个qq客户端的正向Websocket6700端口来链接 替换Cq客户端的方法在下方 当然你也可以自行寻找 只要是能有正向WebSocket6700端口就ok
 
 
-目前所有拥有的指令:cx,info，round(暂不支持)
+目前所有拥有的指令:cx,info，round
 
-~~增加round指令
+加round指令
 round list查询玩家列表
 round rest 重启回合
 round start 启动回合
 round allrest 重启服务器
 round kick+id 踢出对应id玩家
 round bc+text 向服务器发送广播
-Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues里提出~~
+Warn:目前round指令只允许Q群群主使用 如有其他需求请在issues里提出
 
 
 说明：
@@ -92,7 +92,7 @@ Warn:不用安装OverFlow 到转换端口那一步 将端口5800专向8080端口
 
 回车确定 挂在后台
 
-就可以了 可以说是暂时代替 除了round暂时不能用 其他功能均正常运行
+就可以了  功能均正常运行
 
 6.在群中发送cx，info即可获取服务器信息
 
