@@ -2,6 +2,11 @@
 <a href="https://github.com/YF-OFFICE/SocketServer-SCPSL/releases"><img src="https://img.shields.io/github/v/release/YF-OFFICE/SocketServer-SCPSL?display_name=tag&style=for-the-badge&logo=gitbook&label=Release" href="https://github.com/YF-OFFICE/SocketServer-SCPSL/releases" alt="GitHub Releases"></a>
 <img src="https://img.shields.io/github/downloads/YF-OFFICE/SocketServer-SCPSL/total?style=for-the-badge&logo=github" alt="Downloads">
 
+# 因部分原因(QQ机器人问题)本库不再更新 原代码可以借鉴 可star支持一下~#######
+
+
+
+
 一个可以将QQ群与服务端连接的插件
 
 # 如有bug请在[Iss](https://github.com/YF-OFFICE/SocketServer-SCPSL/issues)里提出
